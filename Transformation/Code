@@ -1,1 +1,53 @@
+# Ingestion queries:
+SELECT 
+	cst_id, count(*)
+FROM 
+	ingestion.crm_cust_info
+GROUP BY 
+	cst_id
+HAVING 
+	count(*) > 1 or cst_id is null
 
+
+SELECT * FROM 
+	ingestion.crm_cust_info 
+WHERE 
+	cst_id is NULL
+
+SELECT * FROM 
+	ingestion.crm_cust_info 
+WHERE
+	cst_key != CONCAT('AW000', cst_id)
+
+SELECT * FROM 
+	ingestion.crm_cust_info 
+WHERE 
+	cst_firstname != TRIM(cst_firstname)
+
+
+
+# After transformation queries: (no more duplicates and null, free spaces removed)
+SELECT 
+	cst_id, count(*)
+FROM 
+	transformation.crm_cust_info
+GROUP BY 
+	cst_id
+HAVING 
+	count(*) > 1 or cst_id is null
+
+
+SELECT * FROM 
+	transformation.crm_cust_info 
+WHERE 
+	cst_id is NULL
+
+SELECT * FROM 
+	transformation.crm_cust_info 
+WHERE
+	cst_key != CONCAT('AW000', cst_id)
+
+SELECT * FROM 
+	transformation.crm_cust_info 
+WHERE 
+	cst_firstname != TRIM(cst_firstname)
