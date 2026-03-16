@@ -51,3 +51,25 @@ SELECT * FROM
 	transformation.crm_cust_info 
 WHERE 
 	cst_firstname != TRIM(cst_firstname)
+
+
+ALTER TABLE ingestion.crm_prd_info
+ADD cat_id VARCHAR(5);
+
+ALTER TABLE transformation.crm_prd_info
+ADD cat_id VARCHAR(5);
+
+SELECT * FROM ingestion.crm_prd_info;
+
+SELECT * FROM transformation.crm_prd_info;
+
+SELECT * FROM transformation.crm_sales_details
+WHERE sls_price IS NULL;
+
+SELECT sls_quantity, count(*)
+FROM transformation.crm_sales_details
+WHERE sls_quantity > 1
+GROUP BY sls_quantity
+
+
+
